@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 /**
@@ -33,10 +34,11 @@ public class Statistics {
         if (x.length == 0) {
             throw new IllegalArgumentException("Array mustn't empty");
         } else {
+            DecimalFormat newFormat = new DecimalFormat("#.##");
             double mean = average(x);
             double sum = 0;
             for (double i : x) sum += i * i;
-            return Math.sqrt((sum / x.length) - (mean * mean));
+            return Double.valueOf(newFormat.format((sum / x.length) - (mean * mean)));
         }
     }
 
@@ -59,22 +61,16 @@ public class Statistics {
      * @throws IllegalArgumentException if arrays are not same length or length is 0.
      */
     public static double covariance(double[] x, double[] y) {
-        if (x.length != y.length || x.length == 0 || y.length == 0)
-            throw new IllegalArgumentException("Array should have the same length and have element more than 0");
-        else {
+        if (x.length != y.length || x.length == 0 || y.length == 0) {
+            throw new IllegalArgumentException("Arrays should have the same length and have elements more than 0");
+        } else {
+            DecimalFormat newFormat = new DecimalFormat("#.##");
             double mean_x = average(x);
             double mean_y = average(y);
             double sum = 0;
             for (int i = 0; i < x.length; i++) sum += (x[i] - mean_x) * (y[i] - mean_y);
-            return sum / (x.length - 1);
+            return Double.valueOf(newFormat.format(sum / (x.length - 1)));
         }
     }
-
-
-//    public static void main(String[] args) {
-//        double[] a = new double[]{2.1, 2.5, 4.0, 3.6};
-//        double[] b = new double[]{8, 12, 14, 10};
-//        System.out.println(covariance(a, b));
-//    }
 
 }
