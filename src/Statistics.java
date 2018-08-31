@@ -1,5 +1,4 @@
 import java.text.DecimalFormat;
-import java.util.Arrays;
 
 /**
  * Methods for computing some common statistics,
@@ -32,9 +31,8 @@ public class Statistics {
      * @throws IllegalArgumentException if x is empty
      */
     public static double variance(double[] x) {
-        if (x.length == 0) {
-            throw new IllegalArgumentException("Array mustn't empty");
-        } else {
+        if (x.length == 0) throw new IllegalArgumentException("Array mustn't empty");
+        else {
             DecimalFormat newFormat = new DecimalFormat("#.##");
             double mean = average(x);
             double sum = 0;
@@ -46,14 +44,10 @@ public class Statistics {
     /**
      * Compute the covariance between arrays x and y.
      * The covariance is defined by
-     * <p>
      * sum[ (x[k] - average(x)) * (y[k] - average(y)) ]/n
      * where n is number of elements in the arrays.
-     * <p>
      * But it is more efficient to compute using the equivalent formula:
-     * <p>
      * sum( x[k]*y[k] )/n - average(x)*average(y)
-     * <p>
      * Note that if x == y, this is the variance.
      *
      * @param x is the first array of values.
