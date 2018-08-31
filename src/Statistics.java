@@ -17,7 +17,8 @@ public class Statistics {
         // Some fun: sum using a Stream instead of a loop.
         if (x.length == 0) return 0;
         else {
-            double sum = Arrays.stream(x).sum();
+            double sum = 0;
+            for (double i : x) sum += i;
             return sum / x.length;
         }
     }
