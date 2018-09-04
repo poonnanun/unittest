@@ -47,6 +47,13 @@ public class StatisticsTest {
     }
 
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testEmptyArrayInputVariance(){
+        double x[] = new double[]{};
+        Statistics.variance(x);
+    }
+
+
     @Test
     public void testVariance() {
         double a[] = new double[]{600, 470, 170, 430, 300};
@@ -59,6 +66,16 @@ public class StatisticsTest {
         assertEquals(46.22, Statistics.variance(a), TOL);
         a = new double[]{0, 1, 1, 2, 3, 5, 8, 13, 21, 34};
         assertEquals(109.56, Statistics.variance(a), TOL);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testInvalideInputCovariance(){
+        double x[] = new double[]{};
+        double y[] = new double[]{};
+        Statistics.covariance(x,y);
+        x = new double[]{35,45};
+        y = new double[]{25};
+        Statistics.covariance(x,y);
     }
 
     @Test
