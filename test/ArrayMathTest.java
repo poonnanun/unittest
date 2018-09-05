@@ -25,10 +25,31 @@ public class ArrayMathTest {
 		y = new double[] { };
 		assertEquals( 0.0, ArrayMath.dotProduct(x, y), TOL);
 	}
-	
-	//TODO Add at least one test for the "typical" case: vectors larger than 1.
 	// Please don't copy my tests. You don't need random numbers (not a good idea
-	// because test results may not be reproducable).
+	// because test results may not be reproducible). 
+	
+	@Test
+	public void testDotProductMultipleVectors() {
+		// 2 length vector
+		double[] x = {2.2, 5.1};
+		double[] y = {3.1, -5.2};
+		double expected = (x[0]*y[0])+(x[1]*y[1]);
+		assertEquals( expected, ArrayMath.dotProduct(x, y), TOL);
+		assertEquals( expected, ArrayMath.dotProduct(y, x), TOL);
+		
+		// Max value 2 length vector
+		double[] tx = {Double.MAX_VALUE, Double.MIN_VALUE};
+		double[] ty = {Double.MIN_VALUE, Double.MAX_VALUE};
+		double txpected = (tx[0]*ty[0])+(tx[1]*ty[1]);
+		assertEquals( txpected, ArrayMath.dotProduct(tx, ty), TOL);
+		assertEquals( txpected, ArrayMath.dotProduct(ty, tx), TOL);
+		
+		// 3 length vector
+		double[] j = {1.1 ,2.2, 3.3};
+		double[] k = {-1.1, 3.1, -4.1};
+		assertEquals( -7.92, ArrayMath.dotProduct(j, k), TOL);
+		assertEquals( -7.92, ArrayMath.dotProduct(k, j), TOL);
+	}
 
 	@Test
 	public void testDotProductHugeVectors() {
