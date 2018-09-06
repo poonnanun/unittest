@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Arrays;
 
 /**
@@ -13,8 +14,12 @@ public class Statistics {
 	 */
 	public static double average(double[] x) {
 		// Some fun: sum using a Stream instead of a loop.
-		double sum = Arrays.stream(x).sum();
-		return sum/x.length;
+        if (x.length == 0) return 0;
+        else {
+            double sum = 0;
+            for (double i : x) sum += i;
+            return sum / x.length;
+        }
 	}
 	
 	/**
@@ -26,8 +31,14 @@ public class Statistics {
 	 * @throws IllegalArgumentException if x is empty
 	 */
 	public static double variance(double[] x) {
-		//TODO write the code
-		return 0;
+		if (x.length == 0) throw new IllegalArgumentException("Array mustn't empty");
+		else {
+			DecimalFormat newFormat = new DecimalFormat("#.##");
+			double mean = average(x);
+			double sum = 0;
+			for (double i : x) sum += i * i;
+			return Double.valueOf(newFormat.format((sum / x.length) - (mean * mean)));
+		}
 	}
 	
 	/**
@@ -49,8 +60,16 @@ public class Statistics {
 	 * @throws IllegalArgumentException if arrays are not same length or length is 0.
 	 */
 	public static double covariance(double[] x, double[] y) {
-		//TODO write the code
-		return 0;
+		if (x.length != y.length || x.length == 0 || y.length == 0) {
+			throw new IllegalArgumentException("Arrays should have the same length and have elements more than 0");
+		} else {
+			DecimalFormat newFormat = new DecimalFormat("#.##");
+			double mean_x = average(x);
+			double mean_y = average(y);
+			double sum = 0;
+			for (int i = 0; i < x.length; i++) sum += (x[i] - mean_x) * (y[i] - mean_y);
+			return Double.valueOf(newFormat.format(sum / (x.length - 1)));
+		}
 	}
 	
 }
